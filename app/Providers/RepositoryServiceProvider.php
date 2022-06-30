@@ -11,7 +11,6 @@ class RepositoryServiceProvider extends ServiceProvider
 
     protected array $repositories = [
         'IRoleRepository' => 'RoleRepository'
-        //
     ];
 
     /**
