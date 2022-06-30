@@ -16,6 +16,13 @@ class Role extends Model implements IScopeFilter
 
     protected $fillable = ['name', 'status'];
 
+    protected $casts = [
+        'id' => 'integer',
+        'status' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
+    ];
+
     public function scopeFilter(Builder $query, array $params = []): Builder
     {
         if (empty($params)) {

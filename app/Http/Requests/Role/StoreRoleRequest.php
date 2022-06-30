@@ -25,11 +25,12 @@ class StoreRoleRequest extends FormRequest
     {
         return [
             'name' => [
-                // Validaciones
                 'required',
                 'min:5',
                 'max:50'
             ]
         ];
     }
+
+
 }
