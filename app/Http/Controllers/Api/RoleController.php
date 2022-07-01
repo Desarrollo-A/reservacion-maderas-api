@@ -2,12 +2,24 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Contracts\Services\IRoleService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Role\StoreRoleRequest;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    protected IRoleService $roleService;
+
+    /**
+     * @param IRoleService $roleService
+     */
+    public function __construct(IRoleService $roleService)
+    {
+        $this->roleService = $roleService;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +30,14 @@ class RoleController extends Controller
         //
     }
 
+    /**
+     * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
+     */
     public function store(StoreRoleRequest $request)
     {
-        $data = $request->validated();
+        $data = $request->toDTO();
+        $role = $this->roleService->create($data);
+        return response()->json($role);
     }
 
     /**
