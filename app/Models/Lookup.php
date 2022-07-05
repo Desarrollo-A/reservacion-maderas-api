@@ -10,4 +10,12 @@ class Lookup extends Model
     use HasFactory;
 
     protected $fillable = ['type', 'name'];
+
+    protected $casts = [
+        'id' => 'integer',
+        'type' => 'integer',
+        'status' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
+    ];
 }

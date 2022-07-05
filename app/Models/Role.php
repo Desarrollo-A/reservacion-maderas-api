@@ -10,4 +10,11 @@ class Role extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'status'];
+
+    protected $casts = [
+        'id' => 'integer',
+        'status' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
+    ];
 }
