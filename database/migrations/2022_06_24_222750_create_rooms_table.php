@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreign('recepcionist_id')
                 ->references('id')
                 ->on('users');
-            $table->unsignedBigInteger('status_id');
+            $table->unsignedSmallInteger('status_id');
             $table->foreign('status_id')
                 ->references('id')
                 ->on('lookups');
