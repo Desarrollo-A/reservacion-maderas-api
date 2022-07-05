@@ -17,11 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('code', 75);
             $table->string('name', 120);
-            $table->unsignedBigInteger('state_id');
-            $table->smallInteger('no_people');
-            $table->tinyInteger('status');
             $table->foreignId('office_id')
                 ->constrained();
+            $table->smallInteger('no_people');
+            $table->tinyInteger('status');
             $table->unsignedBigInteger('recepcionist_id');
             $table->foreign('recepcionist_id')
                 ->references('id')
