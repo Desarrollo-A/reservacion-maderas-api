@@ -122,6 +122,7 @@ return [
     'uploaded'             => 'Subir :attribute ha fallado.',
     'url'                  => 'El formato :attribute es inválido.',
     'uuid'                 => 'El campo :attribute debe ser un UUID válido.',
+
     'custom'               => [
         'email'    => [
             'unique' => 'El :attribute ya ha sido registrado.',
@@ -130,6 +131,7 @@ return [
             'min' => 'La :attribute debe contener más de :min caracteres',
         ],
     ],
+
     'attributes'           => [
         'address'               => 'dirección',
         'age'                   => 'edad',
@@ -141,7 +143,7 @@ return [
         'date'                  => 'fecha',
         'day'                   => 'día',
         'description'           => 'descripción',
-        'email'                 => 'correo electrónico',
+        'email'                 => 'Correo electrónico',
         'excerpt'               => 'extracto',
         'first_name'            => 'nombre',
         'gender'                => 'género',
@@ -152,7 +154,7 @@ return [
         'mobile'                => 'móvil',
         'month'                 => 'mes',
         'name'                  => 'nombre',
-        'password'              => 'contraseña',
+        'password'              => 'Contraseña',
         'password_confirmation' => 'confirmación de la contraseña',
         'phone'                 => 'teléfono',
         'price'                 => 'precio',

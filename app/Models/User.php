@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Contracts\IScopeFilter;
+use App\Models\Traits\Sortable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements IScopeFilter
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Sortable;
+
+    public array $allowedSorts = ['full_name', 'email', 'personal_phone', 'office_phone'];
 
     /**
      * The attributes that are mass assignable.
@@ -18,19 +22,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'full_name',
         'email',
         'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
+        'personal_phone',
+        'office_phone',
+        'status',
+        'role_id'
     ];
 
     /**
@@ -39,6 +37,15 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'id' => 'integer',
+        'status' => 'integer',
+        'role_id' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
     ];
+
+    public function scopeFilter(Builder $query, array $params = []): Builder
+    {
+        return $query;
+    }
 }
