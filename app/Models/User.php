@@ -15,7 +15,8 @@ class User extends Authenticatable implements IScopeFilter
 {
     use HasApiTokens, HasFactory, Notifiable, Sortable;
 
-    public array $allowedSorts = ['full_name', 'email', 'personal_phone', 'office_phone'];
+    public array $allowedSorts = ['no_employee', 'full_name', 'email', 'personal_phone', 'office_phone', 'position',
+        'area'];
 
     /**
      * The attributes that are mass assignable.
@@ -23,11 +24,14 @@ class User extends Authenticatable implements IScopeFilter
      * @var array<int, string>
      */
     protected $fillable = [
+        'no_employee',
         'full_name',
         'email',
         'password',
         'personal_phone',
         'office_phone',
+        'position',
+        'area',
         'status',
         'role_id'
     ];
