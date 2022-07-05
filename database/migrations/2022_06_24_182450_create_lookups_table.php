@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('lookups', function (Blueprint $table) {
-            $table->id();
-            $table->tinyInteger('type');
-            $table->string('code', 50);
+            $table->smallIncrements('id');
+            $table->smallInteger('type');
             $table->string('name');
-            $table->tinyInteger('status');
+            $table->boolean('status')
+                ->default(true);
             $table->timestamps();
         });
     }
