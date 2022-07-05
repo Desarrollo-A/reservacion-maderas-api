@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Enums\StatusUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,7 +21,8 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('password'),
             'personal_phone' => $this->faker->numerify('##########'),
-            'status' => StatusUser::Active->value
+            'position' => $this->faker->jobTitle(),
+            'area' => $this->faker->company()
         ];
     }
 

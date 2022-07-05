@@ -22,7 +22,12 @@ return new class extends Migration
             $table->string('personal_phone', 10);
             $table->string('office_phone', 10)
                 ->nullable();
-            $table->tinyInteger('status');
+            $table->string('position', 100);
+            $table->string('area', 100);
+            $table->unsignedSmallInteger('status_id');
+            $table->foreign('status_id')
+                ->references('id')
+                ->on('lookups');
             $table->unsignedTinyInteger('role_id');
             $table->foreign('role_id')
                 ->references('id')
