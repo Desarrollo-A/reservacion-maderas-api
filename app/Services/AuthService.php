@@ -7,7 +7,6 @@ use App\Contracts\Services\IAuthService;
 use App\Core\BaseService;
 use App\Exceptions\CustomErrorException;
 use App\Helpers\Enum\Message;
-use App\Models\Enums\StatusUser;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
@@ -42,11 +41,11 @@ class AuthService extends BaseService implements IAuthService
             throw new CustomErrorException(Message::CREDENTIALS_INVALID, Response::HTTP_BAD_REQUEST);
         }
 
-        if ($user->status === StatusUser::Inactive->value) {
+        if ($user->lookup->name === 'Inactivo') {
             throw new CustomErrorException(Message::USER_INACTIVE, Response::HTTP_BAD_REQUEST);
         }
 
-        if ($user->status === StatusUser::Blocked->value) {
+        if ($user->lookup->name === 'Bloqueado') {
             throw new CustomErrorException(Message::USER_BLOCKED, Response::HTTP_BAD_REQUEST);
         }
 
