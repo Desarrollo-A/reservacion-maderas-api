@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Lookup;
+use App\Models\Menu;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +18,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        Schema::disableForeignKeyConstraints();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Lookup::flushEventListeners();
+        Role::flushEventListeners();
+        User::flushEventListeners();
+        Menu::flushEventListeners();
+
+        $this->call(LookupSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(UserAdminSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(MenuSeeder::class);
+
+        Schema::enableForeignKeyConstraints();
     }
 }

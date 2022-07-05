@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('lookups', function (Blueprint $table) {
-            $table->id();
-            $table->tinyInteger('type');
-            $table->string('code', 50);
-            $table->string('name');
-            $table->tinyInteger('status');
+        Schema::create('submenus', function (Blueprint $table) {
+            $table->tinyIncrements('id');
+            $table->string('path_route');
+            $table->string('label', 120);
+            $table->tinyInteger('order');
+            $table->unsignedTinyInteger('menu_id');
+            $table->foreign('menu_id')
+                ->references('id')
+                ->on('menus');
             $table->timestamps();
         });
     }
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lookups');
+        Schema::dropIfExists('submenus');
     }
 };

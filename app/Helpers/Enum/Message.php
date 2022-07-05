@@ -10,6 +10,7 @@ class Message
     public final const USER_IS_VERIFIED = 'El usuario ya fue verificado.';
     public final const USER_NOT_VERIFIED = 'Usuario no verificado.';
     public final const USER_INACTIVE = 'El usuario está inactivo.';
+    public final const USER_BLOCKED = 'El usuario está bloqueado.';
     public final const INVALID_QUERY_PARAMETER = 'Parámetro de consulta inválido.';
     public final const INVALID_ID_PARAMETER_WITH_ID_BODY = 'El id es diferente al id del parámetro de ruta.';
 
