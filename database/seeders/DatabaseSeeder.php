@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Lookup;
+use App\Models\Menu;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -22,11 +23,13 @@ class DatabaseSeeder extends Seeder
         Lookup::flushEventListeners();
         Role::flushEventListeners();
         User::flushEventListeners();
+        Menu::flushEventListeners();
 
         $this->call(LookupSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UserAdminSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(MenuSeeder::class);
 
         Schema::enableForeignKeyConstraints();
     }
