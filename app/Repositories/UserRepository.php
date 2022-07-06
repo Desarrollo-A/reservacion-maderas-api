@@ -18,6 +18,11 @@ class UserRepository extends BaseRepository implements IUserRepository
         $this->entity = $user;
     }
 
+    public function findById(int $id): User
+    {
+        return $this->entity->with('lookup', 'role')->findOrFail($id);
+    }
+
     public function findByEmail(string $email): User
     {
         return $this->entity
