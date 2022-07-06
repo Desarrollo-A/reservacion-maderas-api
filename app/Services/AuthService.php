@@ -7,9 +7,13 @@ use App\Contracts\Services\IAuthService;
 use App\Core\BaseService;
 use App\Exceptions\CustomErrorException;
 use App\Helpers\Enum\Message;
+use App\Mail\Auth\RestorePasswordMail;
+use App\Models\Dto\UserDTO;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthService extends BaseService implements IAuthService
@@ -33,6 +37,29 @@ class AuthService extends BaseService implements IAuthService
     {
         $user = $this->checkAccount($noEmployee, $password);
         return $user->createToken('api-token')->plainTextToken;
+    }
+
+    /**
+     * @throws CustomErrorException
+     * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
+     */
+    public function restorePassword(string $email): void
+    {
+        $user = $this->userRepository->findByEmail($email);
+
+        if ($user->lookup->name === 'Inactivo') {
+            throw new CustomErrorException(Message::USER_INACTIVE, Response::HTTP_BAD_REQUEST);
+        }
+
+        if ($user->lookup->name === 'Bloqueado') {
+            throw new CustomErrorException(Message::USER_BLOCKED, Response::HTTP_BAD_REQUEST);
+        }
+
+        $newPassword = Str::random(User::RESTORE_PASSWORD_LENGTH);
+        $userDTO = new UserDTO(password: bcrypt($newPassword));
+
+        $user = $this->userRepository->update($user->id, $userDTO->only('password')->toArray());
+        Mail::to($user)->send(new RestorePasswordMail($user, $newPassword));
     }
 
     /**
