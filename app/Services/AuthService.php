@@ -21,6 +21,11 @@ class AuthService extends BaseService implements IAuthService
         $this->userRepository = $userRepository;
     }
 
+    public function getUser(int $id): User
+    {
+        return $this->userRepository->findById($id);
+    }
+
     /**
      * @throws CustomErrorException
      */

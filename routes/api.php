@@ -17,6 +17,7 @@ Route::prefix('v1')->group(function () {
             ->prefix('auth')
             ->name('auth')
             ->group(function () {
+                Route::get('/user', 'getUser')->name('user');
                 Route::get('/logout', 'logout')->name('logout');
             });
     });
