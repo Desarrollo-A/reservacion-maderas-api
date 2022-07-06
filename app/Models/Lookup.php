@@ -12,6 +12,14 @@ class Lookup extends Model
 
     protected $fillable = ['type', 'name'];
 
+    protected $casts = [
+        'id' => 'integer',
+        'type' => 'integer',
+        'status' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
+    ];
+
     public function users(): HasMany
     {
         return $this->hasMany(User::class, 'status_id', 'id');

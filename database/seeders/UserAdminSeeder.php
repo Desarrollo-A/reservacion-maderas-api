@@ -18,6 +18,7 @@ class UserAdminSeeder extends Seeder
     public function run()
     {
         User::create([
+            'no_employee' => 'CIB00000',
             'full_name' => 'Administrador TI',
             'email' => 'admin@ciudadmaderas.com',
             'password' => bcrypt('password'),
@@ -25,7 +26,7 @@ class UserAdminSeeder extends Seeder
             'position' => 'Administrador',
             'area' => 'TI',
             'status_id' => $activeStatus = Lookup::query()
-                ->where('type', TypeLookup::StatusUser->value)
+                ->where('type', TypeLookup::STATUS_USER->value)
                 ->where('name', 'Activo')
                 ->first()
                 ->id,

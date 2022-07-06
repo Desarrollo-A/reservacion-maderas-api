@@ -13,18 +13,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rooms', function (Blueprint $table) {
+        Schema::create('requests', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 75);
-            $table->string('name', 120);
-            $table->foreignId('office_id')
+            $table->datetime('start_date');
+            $table->datetime('end_date');
+            $table->tinyInteger('no_people');
+            $table->smallInteger('duration')
+                ->nullable();
+            $table->foreignId('user_id')
                 ->constrained();
-            $table->smallInteger('no_people');
-            $table->tinyInteger('status');
-            $table->unsignedBigInteger('recepcionist_id');
-            $table->foreign('recepcionist_id')
+            $table->unsignedSmallInteger('service_id');
+            $table->foreign('service_id')
                 ->references('id')
-                ->on('users');
+                ->on('lookups');
+            $table->unsignedSmallInteger('level_id');
+            $table->foreign('level_id')
+                ->references('id')
+                ->on('lookups');
             $table->unsignedSmallInteger('status_id');
             $table->foreign('status_id')
                 ->references('id')
@@ -40,6 +45,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rooms');
+        Schema::dropIfExists('requests');
     }
 };
