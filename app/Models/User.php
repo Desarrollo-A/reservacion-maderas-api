@@ -58,4 +58,9 @@ class User extends Authenticatable implements IScopeFilter
     {
         return $this->belongsTo(Lookup::class, 'status_id', 'id');
     }
+
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

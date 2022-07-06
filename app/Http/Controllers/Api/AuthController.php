@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Contracts\Services\IAuthService;
 use App\Core\BaseApiController;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Resources\User\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
@@ -15,6 +16,12 @@ class AuthController extends BaseApiController
     public function __construct(IAuthService $authService)
     {
         $this->authService = $authService;
+    }
+
+    public function getUser(): JsonResponse
+    {
+        $user = $this->authService->getUser(auth()->id());
+        return $this->showOne(new UserResource($user));
     }
 
     /**
