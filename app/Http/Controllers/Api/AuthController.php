@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Contracts\Services\IAuthService;
 use App\Core\BaseApiController;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RestorePasswordRequest;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -37,6 +38,16 @@ class AuthController extends BaseApiController
     public function logout(): Response
     {
         auth()->user()->currentAccessToken()->delete();
+        return $this->noContentResponse();
+    }
+
+    /**
+     * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
+     */
+    public function restorePassword(RestorePasswordRequest $request): Response
+    {
+        $userDTO = $request->toDTO();
+        $this->authService->restorePassword($userDTO->email);
         return $this->noContentResponse();
     }
 }

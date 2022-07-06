@@ -15,6 +15,8 @@ class User extends Authenticatable implements IScopeFilter
 {
     use HasApiTokens, HasFactory, Notifiable, Sortable;
 
+    final const RESTORE_PASSWORD_LENGTH = 15;
+
     public array $allowedSorts = ['no_employee', 'full_name', 'email', 'personal_phone', 'office_phone', 'position',
         'area'];
 

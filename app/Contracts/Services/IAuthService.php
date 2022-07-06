@@ -10,4 +10,6 @@ interface IAuthService extends IBaseService
     public function getUser(int $id): User;
 
     public function login(string $noEmployee, string $password): string;
+
+    public function restorePassword(string $email): void;
 }
