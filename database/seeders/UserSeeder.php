@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         $admin = Role::query()->where('name', 'Recepción')->first()->id;
         $reception = Role::query()->where('name', 'Solicitante')->first()->id;
         $activeStatus = Lookup::query()
-            ->where('type', TypeLookup::StatusUser->value)
+            ->where('type', TypeLookup::STATUS_USER->value)
             ->where('name', 'Activo')
             ->first()
             ->id;

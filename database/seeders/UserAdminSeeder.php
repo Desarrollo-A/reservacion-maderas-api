@@ -26,7 +26,7 @@ class UserAdminSeeder extends Seeder
             'position' => 'Administrador',
             'area' => 'TI',
             'status_id' => $activeStatus = Lookup::query()
-                ->where('type', TypeLookup::StatusUser->value)
+                ->where('type', TypeLookup::STATUS_USER->value)
                 ->where('name', 'Activo')
                 ->first()
                 ->id,
