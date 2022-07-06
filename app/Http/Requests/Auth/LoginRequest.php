@@ -16,8 +16,15 @@ class LoginRequest extends FormRequest implements IReturnDto
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email:dns', 'max:150'],
+            'noEmployee' => ['required', 'min:3', 'max:50'],
             'password' => ['required', 'min:8', 'max:50']
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'noEmployee' => 'Usuario'
         ];
     }
 
@@ -26,6 +33,6 @@ class LoginRequest extends FormRequest implements IReturnDto
      */
     public function toDTO(): UserDTO
     {
-        return new UserDTO(email: $this->email, password: $this->password);
+        return new UserDTO(noEmployee: $this->noEmployee, password: $this->password);
     }
 }

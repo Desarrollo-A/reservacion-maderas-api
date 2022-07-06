@@ -24,19 +24,19 @@ class AuthService extends BaseService implements IAuthService
     /**
      * @throws CustomErrorException
      */
-    public function login(string $email, string $password): string
+    public function login(string $noEmployee, string $password): string
     {
-        $user = $this->checkAccount($email, $password);
+        $user = $this->checkAccount($noEmployee, $password);
         return $user->createToken('api-token')->plainTextToken;
     }
 
     /**
      * @throws CustomErrorException
      */
-    private function checkAccount(string $email, string $password): User
+    private function checkAccount(string $noEmployee, string $password): User
     {
         try {
-            $user = $this->userRepository->findByEmail($email);
+            $user = $this->userRepository->findByNoEmployee($noEmployee);
         } catch (ModelNotFoundException) {
             throw new CustomErrorException(Message::CREDENTIALS_INVALID, Response::HTTP_BAD_REQUEST);
         }
