@@ -20,6 +20,8 @@ return new class extends Migration
             $table->tinyInteger('no_people');
             $table->smallInteger('duration')
                 ->nullable();
+            $table->text('comment')
+                ->nullable();
             $table->foreignId('user_id')
                 ->constrained();
             $table->unsignedSmallInteger('service_id');
