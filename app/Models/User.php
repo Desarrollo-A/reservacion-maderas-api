@@ -7,6 +7,7 @@ use App\Models\Traits\Sortable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -64,5 +65,15 @@ class User extends Authenticatable implements IScopeFilter
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function menus(): BelongsToMany
+    {
+        return $this->belongsToMany(Menu::class);
+    }
+
+    public function submenus(): BelongsToMany
+    {
+        return $this->belongsToMany(Submenu::class);
     }
 }
