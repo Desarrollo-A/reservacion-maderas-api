@@ -6,6 +6,7 @@ use App\Contracts\Services\IAuthService;
 use App\Core\BaseApiController;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RestorePasswordRequest;
+use App\Http\Resources\Auth\LoginResource;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -31,8 +32,8 @@ class AuthController extends BaseApiController
     public function login(LoginRequest $request): JsonResponse
     {
         $userDTO = $request->toDTO();
-        $token = $this->authService->login($userDTO->noEmployee, $userDTO->password);
-        return $this->successResponse(['token' => $token], 200);
+        $data = $this->authService->login($userDTO->noEmployee, $userDTO->password);
+        return $this->successResponse(new LoginResource($data), 200);
     }
 
     public function logout(): Response

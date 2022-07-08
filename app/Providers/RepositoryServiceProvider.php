@@ -10,7 +10,9 @@ class RepositoryServiceProvider extends ServiceProvider
     public const IMPLEMENT_REPOSITORY_NAMESPACE = 'App\Repositories\\';
 
     protected array $repositories = [
-        'IUserRepository' => 'UserRepository'
+        'IUserRepository' => 'UserRepository',
+        'IMenuRepository' => 'MenuRepository',
+        'ISubmenuRepository' => 'SubmenuRepository'
     ];
 
     /**

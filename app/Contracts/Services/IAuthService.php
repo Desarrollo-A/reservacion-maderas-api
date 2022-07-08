@@ -4,12 +4,15 @@ namespace App\Contracts\Services;
 
 use App\Core\Contracts\IBaseService;
 use App\Models\User;
+use Illuminate\Support\Collection;
 
 interface IAuthService extends IBaseService
 {
+    public function getNavigationMenu(int $userId): Collection;
+
     public function getUser(int $id): User;
 
-    public function login(string $noEmployee, string $password): string;
+    public function login(string $noEmployee, string $password): Collection;
 
     public function restorePassword(string $email): void;
 }

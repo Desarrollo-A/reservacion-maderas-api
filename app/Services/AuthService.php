@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Contracts\Repositories\IMenuRepository;
+use App\Contracts\Repositories\ISubmenuRepository;
 use App\Contracts\Repositories\IUserRepository;
 use App\Contracts\Services\IAuthService;
 use App\Core\BaseService;
@@ -11,6 +13,7 @@ use App\Mail\Auth\RestorePasswordMail;
 use App\Models\Dto\UserDTO;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -19,10 +22,29 @@ use Symfony\Component\HttpFoundation\Response;
 class AuthService extends BaseService implements IAuthService
 {
     protected IUserRepository $userRepository;
+    protected IMenuRepository $menuRepository;
+    protected ISubmenuRepository $submenuRepository;
 
-    public function __construct(IUserRepository $userRepository)
+    public function __construct(IUserRepository $userRepository, IMenuRepository $menuRepository,
+                                ISubmenuRepository $submenuRepository)
     {
         $this->userRepository = $userRepository;
+        $this->menuRepository = $menuRepository;
+        $this->submenuRepository = $submenuRepository;
+    }
+
+    public function getNavigationMenu(int $userId): Collection
+    {
+        $menus = $this->menuRepository->findByUserId($userId);
+        $submenus = $this->submenuRepository->findByUserId($userId);
+
+        return $menus->map(function ($menu) use ($submenus) {
+            $submenusArr = $submenus->filter(function ($submenu) use ($menu) {
+                return $submenu->menu_id === $menu->id;
+            })->values();
+
+            return collect($menu)->put('submenu', $submenusArr);
+        });
     }
 
     public function getUser(int $id): User
@@ -33,10 +55,12 @@ class AuthService extends BaseService implements IAuthService
     /**
      * @throws CustomErrorException
      */
-    public function login(string $noEmployee, string $password): string
+    public function login(string $noEmployee, string $password): Collection
     {
         $user = $this->checkAccount($noEmployee, $password);
-        return $user->createToken('api-token')->plainTextToken;
+        $token = $user->createToken('api-token')->plainTextToken;
+        $menu = $this->getNavigationMenu($user->id);
+        return collect($user)->put('token', $token)->put('menu', $menu);
     }
 
     /**

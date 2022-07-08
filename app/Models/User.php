@@ -46,7 +46,7 @@ class User extends Authenticatable implements IScopeFilter
      */
     protected $casts = [
         'id' => 'integer',
-        'status' => 'integer',
+        'status_id' => 'integer',
         'role_id' => 'integer',
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
