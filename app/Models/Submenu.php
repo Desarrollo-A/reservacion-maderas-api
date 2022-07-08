@@ -6,15 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Menu extends Model
+class Submenu extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['path_route', 'label', 'icon', 'order'];
+    protected $fillable = ['path_route', 'label', 'order', 'menu_id'];
 
     protected $casts = [
         'id' => 'integer',
         'order' => 'integer',
+        'menu_id' => 'integer',
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
