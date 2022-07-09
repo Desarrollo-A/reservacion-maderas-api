@@ -15,7 +15,7 @@ class MenuSeeder extends Seeder
     public function run()
     {
         Menu::create([
-            'path_route' => '/dashboard/home',
+            'path_route' => '/dashboard/inicio',
             'label' => 'Inicio',
             'icon' => 'mat:insights',
             'order' => 1
@@ -23,7 +23,7 @@ class MenuSeeder extends Seeder
 
         Menu::create([
             'path_route' => '/dashboard/solicitud',
-            'label' => 'Solicitudes',
+            'label' => 'Reservaciones',
             'icon' => 'mat:note_add',
             'order' => 2
         ]);
@@ -40,6 +40,20 @@ class MenuSeeder extends Seeder
             'label' => 'Calendario',
             'icon' => 'mat:calendar_month',
             'order' => 4
+        ]);
+
+        Menu::create([
+            'path_route' => '/dashboard/inventario',
+            'label' => 'Inventario',
+            'icon' => 'mat:inventory_2',
+            'order' => 5
+        ]);
+
+        Menu::create([
+            'path_route' => '/dashboard/reporte',
+            'label' => 'Reportes',
+            'icon' => 'mat:auto_graph',
+            'order' => 6
         ]);
     }
 }
