@@ -33,6 +33,11 @@ class AuthService extends BaseService implements IAuthService
         $this->submenuRepository = $submenuRepository;
     }
 
+    public function changePassword(UserDTO $userDTO): void
+    {
+        $this->userRepository->update($userDTO->id, $userDTO->only('password')->toArray());
+    }
+
     public function getNavigationMenu(int $userId): Collection
     {
         $menus = $this->menuRepository->findByUserId($userId);
