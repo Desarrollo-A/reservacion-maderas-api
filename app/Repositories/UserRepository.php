@@ -34,7 +34,7 @@ class UserRepository extends BaseRepository implements IUserRepository
     public function findByNoEmployee(string $noEmployee): User
     {
         return $this->entity
-            ->with('lookup')
+            ->with('lookup', 'role')
             ->where('no_employee', $noEmployee)
             ->firstOrFail();
     }

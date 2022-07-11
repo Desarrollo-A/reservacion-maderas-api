@@ -41,7 +41,12 @@ class AuthService extends BaseService implements IAuthService
         return $menus->map(function ($menu) use ($submenus) {
             $submenusArr = $submenus->filter(function ($submenu) use ($menu) {
                 return $submenu->menu_id === $menu->id;
-            })->values();
+            })
+                ->map(function ($submenu) use ($menu) {
+                    $submenu['path_route'] = $menu['path_route'].$submenu['path_route'];
+                    return $submenu;
+                })
+                ->values();
 
             return collect($menu)->put('submenu', $submenusArr);
         });
@@ -59,8 +64,7 @@ class AuthService extends BaseService implements IAuthService
     {
         $user = $this->checkAccount($noEmployee, $password);
         $token = $user->createToken('api-token')->plainTextToken;
-        $menu = $this->getNavigationMenu($user->id);
-        return collect($user)->put('token', $token)->put('menu', $menu);
+        return collect($user)->put('token', $token);
     }
 
     /**
