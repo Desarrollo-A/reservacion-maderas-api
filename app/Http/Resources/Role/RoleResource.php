@@ -11,6 +11,14 @@ class RoleResource extends JsonResource
      */
     public function toArray($request): array
     {
+        if ($request->routeIs('auth.login')) {
+            return [
+                'id' => $this['id'],
+                'name' => $this['name'],
+                'status' => $this['status']
+            ];
+        }
+
         return [
             'id' => $this->id,
             'name' => $this->name,
