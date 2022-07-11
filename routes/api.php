@@ -21,6 +21,8 @@ Route::prefix('v1')->group(function () {
                 Route::get('/navigation', 'getNavigationMenu')->name('navigation');
                 Route::get('/user', 'getUser')->name('user');
                 Route::get('/logout', 'logout')->name('logout');
+
+                Route::post('/change-password', 'changePassword')->name('change.password');
             });
     });
 });

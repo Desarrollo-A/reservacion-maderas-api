@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Contracts\Services\IAuthService;
 use App\Core\BaseApiController;
+use App\Http\Requests\Auth\ChangePasswordRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RestorePasswordRequest;
 use App\Http\Resources\Auth\LoginResource;
@@ -19,6 +20,13 @@ class AuthController extends BaseApiController
     public function __construct(IAuthService $authService)
     {
         $this->authService = $authService;
+    }
+
+    public function changePassword(ChangePasswordRequest $request): Response
+    {
+        $userDTO = $request->toDTO();
+        $this->authService->changePassword($userDTO);
+        return $this->noContentResponse();
     }
 
     public function getNavigationMenu(): JsonResponse
