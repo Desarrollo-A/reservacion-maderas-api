@@ -7,6 +7,7 @@ use App\Core\BaseApiController;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RestorePasswordRequest;
 use App\Http\Resources\Auth\LoginResource;
+use App\Http\Resources\Menu\MenuResource;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -18,6 +19,12 @@ class AuthController extends BaseApiController
     public function __construct(IAuthService $authService)
     {
         $this->authService = $authService;
+    }
+
+    public function getNavigationMenu(): JsonResponse
+    {
+        $menu = $this->authService->getNavigationMenu(auth()->id());
+        return $this->showAll(MenuResource::collection($menu));
     }
 
     public function getUser(): JsonResponse
