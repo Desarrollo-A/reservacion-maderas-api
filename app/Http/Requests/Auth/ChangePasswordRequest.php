@@ -16,7 +16,7 @@ class ChangePasswordRequest extends FormRequest implements IReturnDto
     public function rules()
     {
         return [
-            'password' => ['required', 'min:8', 'max:50']
+            'password' => ['required', 'min:5', 'max:50']
         ];
     }
 
