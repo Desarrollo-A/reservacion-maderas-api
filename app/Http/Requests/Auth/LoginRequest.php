@@ -17,7 +17,7 @@ class LoginRequest extends FormRequest implements IReturnDto
     {
         return [
             'noEmployee' => ['required', 'min:3', 'max:50'],
-            'password' => ['required', 'min:8', 'max:50']
+            'password' => ['required', 'min:5', 'max:50']
         ];
     }
 
