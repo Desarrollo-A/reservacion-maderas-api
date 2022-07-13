@@ -17,7 +17,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'no_employee' => 'CIB'.$this->faker->randomNumber(5),
+            'no_employee' => $this->faker->numerify('CIB#####'),
             'full_name' => $this->faker->name()." ".$this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('password'),

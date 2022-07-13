@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Enums\NameRole;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
 
@@ -15,15 +16,15 @@ class RoleSeeder extends Seeder
     public function run()
     {
         Role::create([
-            'name' => 'Administrador',
+            'name' => NameRole::ADMIN->value,
             'status' => true
         ]);
         Role::create([
-            'name' => 'Recepción',
+            'name' => NameRole::RECEPCIONIST->value,
             'status' => true
         ]);
         Role::create([
-            'name' => 'Solicitante',
+            'name' => NameRole::APPLICANT->value,
             'status' => true
         ]);
     }
