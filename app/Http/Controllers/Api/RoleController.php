@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Contracts\Services\IRoleService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+
+    protected IRoleService $roleService;
+    public function __construct(IRoleService $roleService)
+    {
+        $this->roleService = $roleService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,6 +33,9 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->toDTO();
+        $role = $this->roleServices->create($data);
+        return response()->json($role);
     }
 
     /**

@@ -1,7 +1,10 @@
 <?php
 namespace App\Models\Dto;
-class RoleDTO extends 
+use Spatie\DataTransferObject\DataTransferObject;
+
+class RoleDTO extends DataTransferObject
 {
+
     
 }
 
