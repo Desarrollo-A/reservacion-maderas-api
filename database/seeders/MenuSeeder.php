@@ -15,9 +15,9 @@ class MenuSeeder extends Seeder
     public function run()
     {
         Menu::create([
-            'path_route' => '/dashboard/inicio',
-            'label' => 'Inicio',
-            'icon' => 'mat:insights',
+            'path_route' => '/dashboard/usuario',
+            'label' => 'Usuario',
+            'icon' => 'mat:group',
             'order' => 1
         ]);
 
