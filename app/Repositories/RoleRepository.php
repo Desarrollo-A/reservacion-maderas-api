@@ -17,4 +17,9 @@ class RoleRepository extends BaseRepository implements IRoleRepository
     {
         $this->entity = $role;
     }
+
+    public function findByName(string $name): Role
+    {
+        return $this->entity->where('name', $name)->firstOrFail();
+    }
 }
