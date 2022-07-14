@@ -72,11 +72,6 @@ class User extends Authenticatable implements IScopeFilter
         return $this->belongsToMany(Menu::class)->withTimestamps();
     }
 
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
-
     public function submenus(): BelongsToMany
     {
         return $this->belongsToMany(Submenu::class)->withTimestamps();
