@@ -34,6 +34,9 @@ return new class extends Migration
             $table->foreign('role_id')
                 ->references('id')
                 ->on('roles');
+            $table->foreignId('office_id')
+                ->nullable()
+                ->constrained();
             $table->timestamps();
         });
     }
