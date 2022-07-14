@@ -31,10 +31,10 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UserAdminSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(StateSeeder::class);
         $this->call(MenuSeeder::class);
         $this->call(SubmenuSeeder::class);
         $this->call(MenuUserSeeder::class);
-        $this->call(SubmenuUserSeeder::class);
 
         Schema::enableForeignKeyConstraints();
     }
