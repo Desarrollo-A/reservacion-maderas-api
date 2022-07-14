@@ -23,9 +23,9 @@ class UserAdminSeeder extends Seeder
             'email' => 'admin@ciudadmaderas.com',
             'password' => bcrypt('password'),
             'personal_phone' => '4421010101',
-            'position' => 'Administrador',
+            'position' => 'ADMINISTRADOR',
             'area' => 'TI',
-            'status_id' => $activeStatus = Lookup::query()
+            'status_id' => Lookup::query()
                 ->where('type', TypeLookup::STATUS_USER->value)
                 ->where('name', 'Activo')
                 ->first()
