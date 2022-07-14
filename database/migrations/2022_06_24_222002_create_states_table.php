@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('states', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 30);
             $table->string('name', 120);
-            $table->boolean('status');
+            $table->boolean('status')
+                ->default(true);
             $table->timestamps();
         });
     }
