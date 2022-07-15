@@ -28,4 +28,9 @@ class MenuRepository extends BaseRepository implements IMenuRepository
             ->orderBy('order')
             ->get();
     }
+
+    public function findByPathRoute(string $path): Menu
+    {
+        return $this->entity->where('path_route', $path)->firstOrFail();
+    }
 }

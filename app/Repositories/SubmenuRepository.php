@@ -28,4 +28,12 @@ class SubmenuRepository extends BaseRepository implements ISubmenuRepository
             ->orderBy('order')
             ->get();
     }
+
+    public function findByPathRouteAndMenuId(string $path, int $menuId): Submenu
+    {
+        return $this->entity
+            ->where('path_route', $path)
+            ->where('menu_id', $menuId)
+            ->first();
+    }
 }
