@@ -47,6 +47,7 @@ class UserService extends BaseService implements IUserService
             'position', 'area', 'status_id', 'role_id', 'office_id')
             ->toArray();
 
-        return $this->entityRepository->create($data);
+        $user = $this->entityRepository->create($data);
+        return $this->entityRepository->findById($user->id);
     }
 }
