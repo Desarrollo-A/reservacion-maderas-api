@@ -37,7 +37,8 @@ class User extends Authenticatable implements IScopeFilter
         'area',
         'status',
         'role_id',
-        'status_id'
+        'status_id',
+        'office_id'
     ];
 
     /**
@@ -49,6 +50,7 @@ class User extends Authenticatable implements IScopeFilter
         'id' => 'integer',
         'status_id' => 'integer',
         'role_id' => 'integer',
+        'office_id' => 'integer',
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
