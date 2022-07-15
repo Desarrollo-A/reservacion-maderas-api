@@ -26,7 +26,20 @@ class UserDTO extends DataTransferObject
     #[MapTo('office_phone')]
     public ?string $officePhone;
 
-    public ?int $status;
+    public ?string $position;
 
+    public ?string $area;
+
+    #[MapTo('status_id')]
+    public ?int $statusId;
+
+    #[MapTo('role_id')]
     public ?int $roleId;
+
+    public ?RoleDTO $role;
+
+    #[MapTo('office_id')]
+    public ?int $officeId;
+
+    public ?OfficeDTO $office;
 }
