@@ -8,6 +8,15 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
+    private string $token;
+
+    public function __construct(mixed $resource, string $token = '')
+    {
+        parent::__construct($resource);
+        $this->token = $token;
+    }
+
+
     /**
      * Transform the resource into an array.
      */
@@ -23,7 +32,8 @@ class UserResource extends JsonResource
             'position' => $this->position,
             'area' => $this->area,
             'role' => RoleResource::make($this->whenLoaded('role')),
-            'status' => LookupResource::make($this->whenLoaded('lookup'))
+            'status' => LookupResource::make($this->whenLoaded('lookup')),
+            'token' => $this->when( !empty($this->token), $this->token)
         ];
     }
 }

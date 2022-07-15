@@ -36,7 +36,8 @@ class User extends Authenticatable implements IScopeFilter
         'position',
         'area',
         'status',
-        'role_id'
+        'role_id',
+        'status_id'
     ];
 
     /**

@@ -12,7 +12,10 @@ class RepositoryServiceProvider extends ServiceProvider
     protected array $repositories = [
         'IUserRepository' => 'UserRepository',
         'IMenuRepository' => 'MenuRepository',
-        'ISubmenuRepository' => 'SubmenuRepository'
+        'ISubmenuRepository' => 'SubmenuRepository',
+        'ILookupRepository' => 'LookupRepository',
+        'IRoleRepository' => 'RoleRepository',
+        'IOfficeRepository' => 'OfficeRepository'
     ];
 
     /**
