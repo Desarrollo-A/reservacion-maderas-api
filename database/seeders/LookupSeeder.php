@@ -37,5 +37,8 @@ class LookupSeeder extends Seeder
         Lookup::create(['type' => TypeLookup::TYPE_SNACK->value, 'name' => 'Snack']);
         Lookup::create(['type' => TypeLookup::TYPE_SNACK->value, 'name' => 'Bocadillo']);
 
+        Lookup::create(['type' => TypeLookup::STATUS_ROOM->value, 'name' => 'Activa']);
+        Lookup::create(['type' => TypeLookup::STATUS_ROOM->value, 'name' => 'Baja']);
+        Lookup::create(['type' => TypeLookup::STATUS_ROOM->value, 'name' => 'Mantenimiento']);
     }
 }
