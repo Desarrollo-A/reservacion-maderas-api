@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 75);
+            $table->string('code', 75)
+                ->nullable();
             $table->string('name', 120);
             $table->foreignId('office_id')
                 ->constrained();
