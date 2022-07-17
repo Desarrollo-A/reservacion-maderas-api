@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +29,9 @@ Route::prefix('v1')->group(function () {
 
                 Route::post('/change-password', 'changePassword')->name('change.password');
             });
+
+        Route::apiResources([
+            'rooms' => RoomController::class
+        ]);
     });
 });
