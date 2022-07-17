@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Contracts\Services\IRoomService;
 use App\Core\BaseApiController;
+use App\Http\Requests\Room\StoreRoomRequest;
+use App\Http\Resources\Room\RoomResource;
+use App\Models\Enums\NameRole;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class RoomController extends BaseApiController
@@ -15,6 +19,7 @@ class RoomController extends BaseApiController
      */
     public function __construct(IRoomService $roomService)
     {
+        $this->middleware('role.permission:'.NameRole::RECEPCIONIST->value);
         $this->roomService = $roomService;
     }
 
@@ -29,14 +34,13 @@ class RoomController extends BaseApiController
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
      */
-    public function store(Request $request)
+    public function store(StoreRoomRequest $request): JsonResponse
     {
-        //
+        $roomDTO = $request->toDTO();
+        $room = $this->roomService->create($roomDTO);
+        return $this->showOne(new RoomResource($room));
     }
 
     /**
