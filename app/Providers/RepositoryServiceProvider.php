@@ -15,7 +15,8 @@ class RepositoryServiceProvider extends ServiceProvider
         'ISubmenuRepository' => 'SubmenuRepository',
         'ILookupRepository' => 'LookupRepository',
         'IRoleRepository' => 'RoleRepository',
-        'IOfficeRepository' => 'OfficeRepository'
+        'IOfficeRepository' => 'OfficeRepository',
+        'IRoomRepository' => 'RoomRepository'
     ];
 
     /**
