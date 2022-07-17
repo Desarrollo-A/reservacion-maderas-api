@@ -52,18 +52,18 @@ class StoreUserRequest extends FormRequest implements IReturnDto
      */
     public function toDTO(): UserDTO
     {
-        $office = new OfficeDTO(name: $this->office['name']);
+        $office = new OfficeDTO(name: trim($this->office['name']));
         $role = new RoleDTO(name: ($this->isRecepcionist) ? NameRole::RECEPCIONIST->value : NameRole::APPLICANT->value);
 
         return new UserDTO(
-            noEmployee: $this->noEmployee,
-            fullName: $this->fullName,
-            email: $this->email,
+            noEmployee: trim($this->noEmployee),
+            fullName: trim($this->fullName),
+            email: trim($this->email),
             password: bcrypt($this->password),
-            personalPhone: $this->personalPhone,
-            officePhone: $this->officePhone,
-            position: $this->position,
-            area: $this->area,
+            personalPhone: trim($this->personalPhone),
+            officePhone: isset($this->officePhone) ? trim($this->officePhone) : $this->officePhone,
+            position: trim($this->position),
+            area: trim($this->area),
             role: $role,
             office: $office
         );
