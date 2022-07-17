@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreignId('office_id')
                 ->constrained();
             $table->smallInteger('no_people');
-            $table->tinyInteger('status');
             $table->unsignedBigInteger('recepcionist_id');
             $table->foreign('recepcionist_id')
                 ->references('id')
