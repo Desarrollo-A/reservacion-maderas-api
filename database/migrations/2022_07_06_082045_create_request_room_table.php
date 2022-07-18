@@ -13,18 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('requests', function (Blueprint $table) {
-            $table->id();
-            $table->datetime('start_date');
-            $table->datetime('end_date');
-            $table->smallInteger('duration')
-                ->nullable();
-            $table->text('comment')
-                ->nullable();
-            $table->foreignId('user_id')
+        Schema::create('request_room', function (Blueprint $table) {
+            $table->foreignId('request_id')
                 ->constrained();
-            $table->unsignedSmallInteger('status_id');
-            $table->foreign('status_id')
+            $table->foreignId('room_id')
+                ->constrained();
+            $table->tinyInteger('no_people');
+            $table->unsignedSmallInteger('level_id');
+            $table->foreign('level_id')
                 ->references('id')
                 ->on('lookups');
             $table->timestamps();
@@ -38,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('requests');
+        Schema::dropIfExists('request_room');
     }
 };
