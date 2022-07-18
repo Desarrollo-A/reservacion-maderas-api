@@ -13,14 +13,6 @@ class ViewsDefault
 
     final public const VIEWS_DEFAULT_RECEPCIONIST = [
         [
-            'path' => '/dashboard/solicitud',
-            'submenus' => [
-                ['path' => '/sala'],
-                ['path' => '/auto'],
-                ['path' => '/conductor']
-            ]
-        ],
-        [
             'path' => '/dashboard/historial',
             'submenus' => [
                 ['path' => '/sala'],
@@ -40,6 +32,13 @@ class ViewsDefault
             'path' => '/dashboard/reporte',
             'submenus' => []
         ],
+        [
+            'path' => '/dashboard/mantenimiento',
+            'submenus' => [
+                ['path' => '/sala'],
+                ['path' => '/auto']
+            ]
+        ]
     ];
 
     final public const VIEWS_DEFAULT_APPLICANT = [
@@ -47,6 +46,7 @@ class ViewsDefault
             'path' => '/dashboard/solicitud',
             'submenus' => [
                 ['path' => '/sala'],
+                ['path' => '/auto'],
                 ['path' => '/conductor']
             ]
         ],
