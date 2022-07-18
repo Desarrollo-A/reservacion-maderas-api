@@ -17,7 +17,7 @@ class MenuSeeder extends Seeder
         Menu::create([
             'path_route' => '/dashboard/usuario',
             'label' => 'Usuario',
-            'icon' => 'mat:group',
+            'icon' => 'mat:groups',
             'order' => 1
         ]);
 
@@ -54,6 +54,13 @@ class MenuSeeder extends Seeder
             'label' => 'Reportes',
             'icon' => 'mat:auto_graph',
             'order' => 6
+        ]);
+
+        Menu::create([
+            'path_route' => '/dashboard/mantenimiento',
+            'label' => 'Mantenimiento',
+            'icon' => 'mat:engineering',
+            'order' => 7
         ]);
     }
 }
