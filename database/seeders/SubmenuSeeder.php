@@ -17,6 +17,7 @@ class SubmenuSeeder extends Seeder
     {
         $requestMenu = Menu::query()->where('path_route', '/dashboard/solicitud')->first()->id;
         $historyMenu = Menu::query()->where('path_route', '/dashboard/historial')->first()->id;
+        $mantoMenu = Menu::query()->where('path_route', '/dashboard/mantenimiento')->first()->id;
 
         Submenu::create([
             'path_route' => '/sala',
@@ -58,6 +59,20 @@ class SubmenuSeeder extends Seeder
             'label' => 'Conductor',
             'order' => 3,
             'menu_id' => $historyMenu
+        ]);
+
+        Submenu::create([
+            'path_route' => '/sala',
+            'label' => 'Salas de Junta',
+            'order' => 1,
+            'menu_id' => $mantoMenu
+        ]);
+
+        Submenu::create([
+            'path_route' => '/auto',
+            'label' => 'Automóvil',
+            'order' => 2,
+            'menu_id' => $mantoMenu
         ]);
     }
 }
