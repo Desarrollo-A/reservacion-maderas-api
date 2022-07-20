@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('level_snack', function (Blueprint $table) {
-            $table->foreignId('snack_id')
+        Schema::create('request_room', function (Blueprint $table) {
+            $table->foreignId('request_id')
                 ->constrained();
+            $table->foreignId('room_id')
+                ->constrained();
+            $table->tinyInteger('no_people');
             $table->unsignedSmallInteger('level_id');
             $table->foreign('level_id')
                 ->references('id')
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('level_snack');
+        Schema::dropIfExists('request_room');
     }
 };
