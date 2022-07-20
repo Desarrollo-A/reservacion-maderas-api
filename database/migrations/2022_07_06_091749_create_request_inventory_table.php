@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('request_snack', function (Blueprint $table) {
             $table->foreignId('request_id')
                 ->constrained();
-            $table->foreignId('snack_id')
+            $table->foreignId('inventory_id')
                 ->constrained();
             $table->timestamps();
         });
