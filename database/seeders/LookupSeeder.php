@@ -2,7 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Enums\Lookups\InventoryTypeLookup;
+use App\Models\Enums\Lookups\LevelMeetingLookup;
+use App\Models\Enums\Lookups\ServicesListLookup;
+use App\Models\Enums\Lookups\StatusRequestLookup;
+use App\Models\Enums\Lookups\UnitTypeLookup;
 use App\Models\Enums\TypeLookup;
+use App\Models\Enums\Lookups\StatusUserLookup;
 use App\Models\Lookup;
 use Illuminate\Database\Seeder;
 
@@ -15,27 +21,22 @@ class LookupSeeder extends Seeder
      */
     public function run()
     {
-        Lookup::create(['type' => TypeLookup::STATUS_USER->value, 'name' => 'Activo']);
-        Lookup::create(['type' => TypeLookup::STATUS_USER->value, 'name' => 'Inactivo']);
-        Lookup::create(['type' => TypeLookup::STATUS_USER->value, 'name' => 'Bloqueado']);
+        StatusUserLookup::getAll()
+            ->each(fn ($lookup) => Lookup::create(['type' => TypeLookup::STATUS_USER->value, 'name' => $lookup]));
 
-        Lookup::create(['type' => TypeLookup::SERVICES_LIST->value, 'name' => 'Sala de Juntas']);
-        Lookup::create(['type' => TypeLookup::SERVICES_LIST->value, 'name' => 'Automóvil']);
-        Lookup::create(['type' => TypeLookup::SERVICES_LIST->value, 'name' => 'Conductor']);
+        ServicesListLookup::getAll()
+            ->each(fn ($lookup) => Lookup::create(['type' => TypeLookup::SERVICES_LIST->value, 'name' => $lookup]));
 
-        Lookup::create(['type' => TypeLookup::STATUS_REQUEST->value, 'name' => 'Nueva']);
-        Lookup::create(['type' => TypeLookup::STATUS_REQUEST->value, 'name' => 'Aprobada']);
-        Lookup::create(['type' => TypeLookup::STATUS_REQUEST->value, 'name' => 'Rechazada']);
-        Lookup::create(['type' => TypeLookup::STATUS_REQUEST->value, 'name' => 'Propuesta']);
-        Lookup::create(['type' => TypeLookup::STATUS_REQUEST->value, 'name' => 'Cancelada']);
-        Lookup::create(['type' => TypeLookup::STATUS_REQUEST->value, 'name' => 'Sin asistir']);
+        StatusRequestLookup::getAll()
+            ->each(fn ($lookup) => Lookup::create(['type' => TypeLookup::STATUS_REQUEST->value, 'name' => $lookup]));
 
-        Lookup::create(['type' => TypeLookup::LEVEL_MEETING->value, 'name' => 'Administrativa']);
-        Lookup::create(['type' => TypeLookup::LEVEL_MEETING->value, 'name' => 'Directiva']);
+        LevelMeetingLookup::getAll()
+            ->each(fn ($lookup) => Lookup::create(['type' => TypeLookup::LEVEL_MEETING->value, 'name' => $lookup]));
 
-        Lookup::create(['type' => TypeLookup::TYPE_SNACK->value, 'name' => 'Bebida']);
-        Lookup::create(['type' => TypeLookup::TYPE_SNACK->value, 'name' => 'Snack']);
-        Lookup::create(['type' => TypeLookup::TYPE_SNACK->value, 'name' => 'Bocadillo']);
+        InventoryTypeLookup::getAll()
+            ->each(fn ($lookup) => Lookup::create(['type' => TypeLookup::INVENTORY_TYPE->value, 'name' => $lookup]));
 
+        UnitTypeLookup::getAll()
+            ->each(fn ($lookup) => Lookup::create(['type' => TypeLookup::UNIT_TYPE->value, 'name' => $lookup]));
     }
 }
