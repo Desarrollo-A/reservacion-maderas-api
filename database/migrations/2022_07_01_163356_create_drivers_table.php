@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('request_snack', function (Blueprint $table) {
-            $table->foreignId('request_id')
-                ->constrained();
-            $table->foreignId('snack_id')
-                ->constrained();
+        Schema::create('drivers', function (Blueprint $table) {
+            $table->id();
+            $table->string('full_name');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('request_snack');
+        Schema::dropIfExists('drivers');
     }
 };

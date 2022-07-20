@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('snacks', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->smallInteger('quantity');
-            $table->boolean('status')
-                ->default(true);
-            $table->unsignedSmallInteger('type_id');
-            $table->foreign('type_id')
-                ->references('id')
-                ->on('lookups');
+        Schema::create('driver_request', function (Blueprint $table) {
+            $table->foreignId('request_id')
+                ->constrained();
+            $table->foreignId('driver_id')
+                ->nullable()
+                ->constrained();
+            $table->string('output_place');
+            $table->string('destination_place');
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('snacks');
+        Schema::dropIfExists('driver_request');
     }
 };
