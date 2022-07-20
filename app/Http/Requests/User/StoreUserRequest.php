@@ -29,7 +29,7 @@ class StoreUserRequest extends FormRequest implements IReturnDto
             'position' => ['required', 'max:100'],
             'area' => ['required', 'max:100'],
             'isRecepcionist' => ['required', 'bail', 'boolean'],
-            'office.name' => [Rule::requiredIf($this->isRecepcionist)]
+            'office.name' => ['required', 'min:3', 'max:150']
         ];
     }
 

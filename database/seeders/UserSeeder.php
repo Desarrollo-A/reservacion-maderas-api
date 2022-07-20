@@ -18,8 +18,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $admin = Role::query()->where('name', 'Recepción')->first()->id;
-        $reception = Role::query()->where('name', 'Solicitante')->first()->id;
+        $reception = Role::query()->where('name', 'Recepción')->first()->id;
+        $solicitante = Role::query()->where('name', 'Solicitante')->first()->id;
         $officeId = Office::all(['id']);
         $activeStatus = Lookup::query()
             ->where('type', TypeLookup::STATUS_USER->value)
@@ -27,27 +27,20 @@ class UserSeeder extends Seeder
             ->first()
             ->id;
 
-        User::factory()
-            ->create([
-                'role_id' => $admin,
-                'status_id' => $activeStatus,
-                'office_id' => $officeId->random()
-            ]);
-        User::factory()
-            ->create([
-                'role_id' => $admin,
-                'status_id' => $activeStatus,
-                'office_id' => $officeId->random()
-            ]);
-        User::factory()
-            ->create([
-                'role_id' => $admin,
-                'status_id' => $activeStatus,
-                'office_id' => $officeId->random()
-            ]);
+        for($i = 0; $i < 3; $i++) {
+            User::factory()
+                ->create([
+                    'role_id' => $reception,
+                    'status_id' => $activeStatus,
+                    'office_id' => $officeId->random()]);
+        }
 
-        User::factory()
-            ->times(10)
-            ->create(['role_id' => $reception, 'status_id' => $activeStatus]);
+        for($i = 0; $i < 15; $i++) {
+            User::factory()
+                ->create([
+                    'role_id' => $solicitante,
+                    'status_id' => $activeStatus,
+                    'office_id' => $officeId->random()]);
+        }
     }
 }
