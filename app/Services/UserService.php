@@ -38,9 +38,9 @@ class UserService extends BaseService implements IUserService
     {
         $dto->statusId = $this->lookupRepository
             ->findByNameAndType(StatusUserLookup::ACTIVE->value, TypeLookup::STATUS_USER->value)->id;
+        $dto->officeId = $this->officeRepository->findByName($dto->office->name)->id;
         if ($dto->role->name === NameRole::RECEPCIONIST->value) {
             $dto->roleId = $this->roleRepository->findByName('Recepción')->id;
-            $dto->officeId = $this->officeRepository->findByName($dto->office->name)->id;
         } else {
             $dto->roleId = $this->roleRepository->findByName('Solicitante')->id;
         }
