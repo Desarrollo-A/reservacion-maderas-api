@@ -11,6 +11,7 @@ use App\Exceptions\CustomErrorException;
 use App\Helpers\Enum\Message;
 use App\Mail\Auth\RestorePasswordMail;
 use App\Models\Dto\UserDTO;
+use App\Models\Enums\Lookups\StatusUserLookup;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
@@ -80,11 +81,11 @@ class AuthService extends BaseService implements IAuthService
     {
         $user = $this->userRepository->findByEmail($email);
 
-        if ($user->lookup->name === 'Inactivo') {
+        if ($user->lookup->name === StatusUserLookup::INACTIVE->value) {
             throw new CustomErrorException(Message::USER_INACTIVE, Response::HTTP_BAD_REQUEST);
         }
 
-        if ($user->lookup->name === 'Bloqueado') {
+        if ($user->lookup->name === StatusUserLookup::BLOCKED->value) {
             throw new CustomErrorException(Message::USER_BLOCKED, Response::HTTP_BAD_REQUEST);
         }
 
@@ -106,11 +107,11 @@ class AuthService extends BaseService implements IAuthService
             throw new CustomErrorException(Message::CREDENTIALS_INVALID, Response::HTTP_BAD_REQUEST);
         }
 
-        if ($user->lookup->name === 'Inactivo') {
+        if ($user->lookup->name === StatusUserLookup::INACTIVE->value) {
             throw new CustomErrorException(Message::USER_INACTIVE, Response::HTTP_BAD_REQUEST);
         }
 
-        if ($user->lookup->name === 'Bloqueado') {
+        if ($user->lookup->name === StatusUserLookup::BLOCKED->value) {
             throw new CustomErrorException(Message::USER_BLOCKED, Response::HTTP_BAD_REQUEST);
         }
 
