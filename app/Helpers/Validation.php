@@ -15,6 +15,7 @@ class Validation
 
     // Expresiones regulares
     final public const PHONE_REGEX = '/^[0-9]{10}$/';
+    final public const INTEGER_ID = '[0-9]+';
 
     public static function getPerPage(string $queryParam = null): int
     {
