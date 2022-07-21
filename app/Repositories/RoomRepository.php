@@ -21,7 +21,7 @@ class RoomRepository extends BaseRepository implements IRoomRepository
     public function findById(int $id): Room
     {
         return $this->entity
-            ->with('lookup', 'office')
+            ->with('status', 'office')
             ->findOrFail($id);
     }
 }
