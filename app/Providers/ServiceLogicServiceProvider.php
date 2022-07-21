@@ -12,7 +12,9 @@ class ServiceLogicServiceProvider extends ServiceProvider
     protected array $services = [
         'IAuthService' => 'AuthService',
         'IUserService' => 'UserService',
-        'IMenuService' => 'MenuService'
+        'IMenuService' => 'MenuService',
+        'IRoomService' => 'RoomService',
+        'ILookupService' => 'LookupService'
     ];
 
     /**
