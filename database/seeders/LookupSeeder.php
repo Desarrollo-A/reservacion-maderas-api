@@ -6,6 +6,7 @@ use App\Models\Enums\Lookups\InventoryTypeLookup;
 use App\Models\Enums\Lookups\LevelMeetingLookup;
 use App\Models\Enums\Lookups\ServicesListLookup;
 use App\Models\Enums\Lookups\StatusRequestLookup;
+use App\Models\Enums\Lookups\StatusRoomLookup;
 use App\Models\Enums\Lookups\UnitTypeLookup;
 use App\Models\Enums\TypeLookup;
 use App\Models\Enums\Lookups\StatusUserLookup;
@@ -39,8 +40,7 @@ class LookupSeeder extends Seeder
         UnitTypeLookup::getAll()
             ->each(fn ($lookup) => Lookup::create(['type' => TypeLookup::UNIT_TYPE->value, 'name' => $lookup]));
 
-        Lookup::create(['type' => TypeLookup::STATUS_ROOM->value, 'name' => 'Activa']);
-        Lookup::create(['type' => TypeLookup::STATUS_ROOM->value, 'name' => 'Baja']);
-        Lookup::create(['type' => TypeLookup::STATUS_ROOM->value, 'name' => 'Mantenimiento']);
+        StatusRoomLookup::getAll()
+            ->each(fn ($lookup) => Lookup::create(['type' => TypeLookup::STATUS_ROOM->value, 'name' => $lookup]));
     }
 }
