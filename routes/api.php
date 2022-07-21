@@ -44,6 +44,6 @@ Route::prefix('v1')->group(function () {
                     ->where('id', Validation::INTEGER_ID);
             });
 
-        Route::apiResource('rooms', RoomController::class)->only('store');
+        Route::apiResource('rooms', RoomController::class)->only('store', 'index');
     });
 });

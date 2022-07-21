@@ -7,10 +7,12 @@ use App\Contracts\Services\IRoomService;
 use App\Core\BaseApiController;
 use App\Http\Requests\Room\ChangeStatusRoomRequest;
 use App\Http\Requests\Room\StoreRoomRequest;
+use App\Http\Resources\Room\RoomCollection;
 use App\Http\Resources\Room\RoomResource;
 use App\Models\Enums\NameRole;
 use App\Models\Enums\TypeLookup;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class RoomController extends BaseApiController
@@ -26,6 +28,13 @@ class RoomController extends BaseApiController
             ->only('show', 'changeStatus');
         $this->roomService = $roomService;
         $this->lookupService = $lookupService;
+    }
+
+    public function index(Request $request): JsonResponse
+    {
+        $user = auth()->user();
+        $rooms = $this->roomService->findAllPaginatedOffice($request, $user);
+        return $this->showAll(new RoomCollection($rooms, true));
     }
 
     /**

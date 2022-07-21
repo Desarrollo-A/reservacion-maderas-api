@@ -48,6 +48,12 @@ class Room extends Model implements IScopeFilter
         return $query;
     }
 
+    public function scopeFilterOffice(Builder $query, int $officeId): Builder
+    {
+        $query->where('office_id', $officeId);
+        return $query;
+    }
+
     public function office(): BelongsTo
     {
         return $this->belongsTo(Office::class);
