@@ -23,12 +23,4 @@ class RoomService extends BaseService implements IRoomService
         $this->entityRepository = $roomRepository;
         $this->lookupRepository = $lookupRepository;
     }
-
-    public function create(DataTransferObject|RoomDTO $dto): Room
-    {
-        $dto->statusId = $this->lookupRepository->findByNameAndType('Activa', TypeLookup::STATUS_ROOM->value)->id;
-        $room = $this->entityRepository->create($dto->only('name', 'office_id', 'no_people', 'recepcionist_id',
-            'status_id')->toArray());
-        return $room->fresh();
-    }
 }

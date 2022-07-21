@@ -12,12 +12,16 @@ class RolePermission
      * Handle an incoming request.
      * @throws AuthorizationException
      */
-    public function handle(Request $request, Closure $next, string $roleName)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
-        if (auth()->user()->role->name !== $roleName) {
-            throw new AuthorizationException();
+        $hasPermission = false;
+        foreach($roles as $rol) {
+            if (auth()->user()->role->name === $rol) {
+                $hasPermission = true;
+                break;
+            }
         }
 
-        return $next($request);
+        return ($hasPermission) ? $next($request) : throw new AuthorizationException();
     }
 }
