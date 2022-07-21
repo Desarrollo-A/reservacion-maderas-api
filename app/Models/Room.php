@@ -58,7 +58,7 @@ class Room extends Model implements IScopeFilter
         return $this->belongsTo(User::class, 'recepcionist_id', 'id');
     }
 
-    public function lookup(): BelongsTo
+    public function status(): BelongsTo
     {
         return $this->belongsTo(Lookup::class, 'status_id', 'id');
     }
