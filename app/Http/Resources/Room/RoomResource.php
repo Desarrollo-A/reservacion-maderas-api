@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Room;
 
+use App\Http\Resources\Lookup\LookupResource;
+use App\Http\Resources\Office\OfficeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RoomResource extends JsonResource
@@ -19,6 +21,8 @@ class RoomResource extends JsonResource
             'noPeople' => $this->no_people,
             'recepcionistId' => $this->recepcionist_id,
             'statusId' => $this->status_id,
+            'office' => OfficeResource::make($this->whenLoaded('office')),
+            'status' => LookupResource::make($this->whenLoaded('status'))
         ];
     }
 }
