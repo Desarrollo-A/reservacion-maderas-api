@@ -11,10 +11,11 @@ use Symfony\Component\HttpFoundation\Response;
 class Validation
 {
     // Formatos
-    public const FORMAT_DATE_YMD = 'Y-m-d';
+    final public const FORMAT_DATE_YMD = 'Y-m-d';
 
     // Expresiones regulares
-    public const PHONE_REGEX = '/^[0-9]{10}$/';
+    final public const PHONE_REGEX = '/^[0-9]{10}$/';
+    final public const INTEGER_ID = '[0-9]+';
 
     public static function getPerPage(string $queryParam = null): int
     {

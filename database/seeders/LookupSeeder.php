@@ -38,5 +38,9 @@ class LookupSeeder extends Seeder
 
         UnitTypeLookup::getAll()
             ->each(fn ($lookup) => Lookup::create(['type' => TypeLookup::UNIT_TYPE->value, 'name' => $lookup]));
+
+        Lookup::create(['type' => TypeLookup::STATUS_ROOM->value, 'name' => 'Activa']);
+        Lookup::create(['type' => TypeLookup::STATUS_ROOM->value, 'name' => 'Baja']);
+        Lookup::create(['type' => TypeLookup::STATUS_ROOM->value, 'name' => 'Mantenimiento']);
     }
 }

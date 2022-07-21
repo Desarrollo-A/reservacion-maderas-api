@@ -6,6 +6,7 @@ use App\Contracts\Repositories\ILookupRepository;
 use App\Core\BaseRepository;
 use App\Models\Lookup;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 
@@ -16,6 +17,13 @@ class LookupRepository extends BaseRepository implements ILookupRepository
     public function __construct(Lookup $lookup)
     {
         $this->entity = $lookup;
+    }
+
+    public function findAllByType(int $type, array $columns = ['*']): Collection
+    {
+        return $this->entity
+            ->where('type', $type)
+            ->get($columns);
     }
 
     public function findByNameAndType(string $name, int $type): Lookup

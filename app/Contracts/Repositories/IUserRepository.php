@@ -15,4 +15,6 @@ interface IUserRepository extends IBaseRepository
     public function findByEmail(string $email): User;
 
     public function findByNoEmployee(string $noEmployee): User;
+
+    public function findByOfficeIdAndRoleRecepcionist(string $oficeId): User;
 }
