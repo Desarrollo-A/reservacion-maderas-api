@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\Validation;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\UserController;
@@ -29,5 +30,16 @@ Route::prefix('v1')->group(function () {
 
                 Route::post('/change-password', 'changePassword')->name('change.password');
             });
+
+        Route::controller(RoomController::class)
+            ->prefix('rooms')
+            ->name('rooms.')
+            ->group(function () {
+                Route::get('/{id}', 'show')
+                    ->name('show')
+                    ->where('id', Validation::INTEGER_ID);
+            });
+
+        Route::apiResource('rooms', RoomController::class)->except('show');
     });
 });
