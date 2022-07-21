@@ -11,5 +11,5 @@ use App\Models\Room;
  */
 interface IRoomService extends IBaseService
 {
-    //
+    public function changeStatus(int $id, RoomDTO $roomDTO): void;
 }

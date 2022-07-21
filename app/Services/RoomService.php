@@ -39,4 +39,9 @@ class RoomService extends BaseService implements IRoomService
 
         return $room->fresh('status', 'office');
     }
+
+    public function changeStatus(int $id, RoomDTO $roomDTO): void
+    {
+        $this->entityRepository->update($id, $roomDTO->only('status_id')->toArray());
+    }
 }
