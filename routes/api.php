@@ -38,8 +38,12 @@ Route::prefix('v1')->group(function () {
                 Route::get('/{id}', 'show')
                     ->name('show')
                     ->where('id', Validation::INTEGER_ID);
+
+                Route::patch('/change-status/{id}', 'changeStatus')
+                    ->name('change.status')
+                    ->where('id', Validation::INTEGER_ID);
             });
 
-        Route::apiResource('rooms', RoomController::class)->except('show');
+        Route::apiResource('rooms', RoomController::class)->only('store');
     });
 });
