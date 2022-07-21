@@ -4,10 +4,13 @@ namespace App\Repositories;
 
 use App\Contracts\Repositories\IUserRepository;
 use App\Core\BaseRepository;
+use App\Exceptions\CustomErrorException;
+use App\Models\Enums\NameRole;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder as QueryBuilder;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserRepository extends BaseRepository implements IUserRepository
 {
@@ -37,5 +40,18 @@ class UserRepository extends BaseRepository implements IUserRepository
             ->with('lookup', 'role')
             ->where('no_employee', $noEmployee)
             ->firstOrFail();
+    }
+
+    public function findByOfficeIdAndRoleRecepcionist(string $oficeId): User
+    {
+        return $this->entity
+            ->whereHas('role', function (Builder $query) {
+                $query->where('name', NameRole::RECEPCIONIST->value);
+            })
+            ->where('office_id', $oficeId)
+            ->firstOr(function () {
+                throw new CustomErrorException('No hay una recepcionista asignada en esta oficina.',
+                    Response::HTTP_BAD_REQUEST);
+            });
     }
 }
