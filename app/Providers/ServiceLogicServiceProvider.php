@@ -13,7 +13,8 @@ class ServiceLogicServiceProvider extends ServiceProvider
         'IAuthService' => 'AuthService',
         'IUserService' => 'UserService',
         'IMenuService' => 'MenuService',
-        'IRoomService' => 'RoomService'
+        'IRoomService' => 'RoomService',
+        'ILookupService' => 'LookupService'
     ];
 
     /**
