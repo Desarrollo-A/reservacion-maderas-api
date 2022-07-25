@@ -35,12 +35,10 @@ class UserSeeder extends Seeder
                     'office_id' => $officeId->random()]);
         }
 
-        for($i = 0; $i < 15; $i++) {
-            User::factory()
-                ->create([
-                    'role_id' => $solicitante,
-                    'status_id' => $activeStatus,
-                    'office_id' => $officeId->random()]);
-        }
+        User::factory()
+            ->times(15)
+            ->create([
+                'role_id' => $solicitante,
+                'status_id' => $activeStatus]);
     }
 }
